@@ -49,8 +49,8 @@ size_t shadowlru::proc(const request *r, bool warmup) {
   size_t size_distance = PROC_MISS;
   for (auto it = queue.begin(); it != queue.end(); ++it) {
     request& item = *it;
-    size_distance += item.size();
     if (item.kid == r->kid) {
+      size_distance += item.size();
       stat.bytes_cached -= item.size();
       queue.erase(it);
       break;
